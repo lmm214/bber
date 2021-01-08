@@ -6,16 +6,13 @@
 'use strict';
 //自定义api key
 const serverkey = 'xxxx'
+
 //引入模块
 const tcb = require("@cloudbase/node-sdk");
-//云开发初始化
-const app = tcb.init({
-  env: "xxxxx"
-});
-
-//数据库初始化
+// 云函数 SDK / tencent cloudbase sdk
+const app = tcb.init({ env: tcb.SYMBOL_CURRENT_ENV })
 const db = app.database()
-const _ = db.command // 取指令
+const _ = db.command
 
 exports.main = async (event, context) => {
     //return event
