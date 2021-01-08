@@ -10,7 +10,7 @@ const serverkey = 'xxxx'
 const tcb = require("@cloudbase/node-sdk");
 //云开发初始化
 const app = tcb.init({
-  env: "bb-xxxxx"
+  env: "xxxxx"
 });
 
 //数据库初始化
