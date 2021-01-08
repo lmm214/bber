@@ -1,6 +1,12 @@
 {
-    "name": "bb",
+    "name": "bb-func",
     "version": "1.0.0",
     "main": "index.js",
-    "dependencies": {"@cloudbase/node-sdk": "latest"}
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/lmm214/bber.git"
+    },
+    "dependencies": {
+        "@cloudbase/node-sdk": "^2.4.4"
+    }
 }
