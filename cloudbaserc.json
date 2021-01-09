@@ -1,7 +1,7 @@
 {
   "version": "1.0",
   "envId": "{{envId}}",
-  "functionRoot": "./functions",
+  "functionRoot": "./function",
   "functions": [
     {
       "name": "bb",
@@ -17,7 +17,7 @@
       "function": {
         "use": "@cloudbase/framework-plugin-function",
         "inputs": {
-          "functionRootPath": "./functions",
+          "functionRootPath": "./function",
           "functions": [
             {
               "name": "bb",
