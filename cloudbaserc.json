@@ -27,14 +27,19 @@
               "memory": 128
             }
           ],
+          "servicePaths": {
+            "bber": "/bber"
+          }
+        }
+      },
+      "client": {
+        "use": "@cloudbase/framework-plugin-database",
+        "inputs": {
           "collections": [
             {
               "collectionName": "talks"
             }
-          ],
-          "servicePaths": {
-            "bber": "/bber"
-          }
+          ]
         }
       }
     }
