@@ -37,7 +37,8 @@
         "inputs": {
           "collections": [
             {
-              "collectionName": "talks"
+              "collectionName": "talks",
+              "aclTag": "READONLY"
             }
           ]
         }
