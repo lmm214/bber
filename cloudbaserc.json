@@ -38,7 +38,7 @@
           "collections": [
             {
               "collectionName": "talks",
-              "aclTag": "READONLY"
+              "aclTag": "ADMINWRITE"
             }
           ]
         }
