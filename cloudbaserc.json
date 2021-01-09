@@ -1,6 +1,7 @@
 {
   "version": "2.0",
   "envId": "{{envId}}",
+  "functionRootPath": ".",
   "functions": [
     {
       "name": "bber",
@@ -16,6 +17,7 @@
       "function": {
         "use": "@cloudbase/framework-plugin-function",
         "inputs": {
+          "functionRootPath": ".",
           "functions": [
             {
               "name": "bber",
