@@ -1,10 +1,10 @@
 {
-  "version": "2.0",
+  "version": "1.0",
   "envId": "{{envId}}",
   "functionRoot": "./src/function",
   "functions": [
     {
-      "name": "bb",
+      "name": "bber",
       "timeout": 30,
       "runtime": "Nodejs10.15",
       "memorySize": 128,
@@ -12,7 +12,7 @@
     }
   ],
   "framework": {
-    "name": "bb",
+    "name": "bber",
     "plugins": {
       "function": {
         "use": "@cloudbase/framework-plugin-function",
@@ -20,11 +20,16 @@
           "functionRootPath": "./src/function",
           "functions": [
             {
-              "name": "bb",
+              "name": "bber",
               "timeout": 30,
               "envVariables": {},
               "runtime": "Nodejs10.15",
               "memory": 128
+            }
+          ],
+          "collections": [
+            {
+              "collectionName": "talks"
             }
           ],
           "servicePaths": {
