@@ -1,0 +1,19 @@
+{
+  "name": "bber",
+  "version": "0.6.0",
+  "license": "MIT",
+  "main": "./bb/index.js",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lmm214/bber.git"
+  },
+  "devDependencies": {
+    "@cloudbase/cli": "^1.0.7",
+  },
+  "dependencies": {
+    "@cloudbase/js-sdk": "1.3.4-alpha.1"
+  }
+}
