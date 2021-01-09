@@ -12,7 +12,7 @@
     }
   ],
   "framework": {
-    "name": "twikoo",
+    "name": "bb",
     "plugins": {
       "function": {
         "use": "@cloudbase/framework-plugin-function",
@@ -28,7 +28,7 @@
             }
           ],
           "servicePaths": {
-            "twikoo": "/bb"
+            "bb": "/bb"
           }
         }
       }
