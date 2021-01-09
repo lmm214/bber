@@ -5,14 +5,14 @@
   "functions": [
     {
       "name": "bb",
-      "timeout": 20,
+      "timeout": 30,
       "runtime": "Nodejs10.15",
       "memorySize": 128,
       "handler": "index.main"
     }
   ],
   "framework": {
-    "name": "bb",
+    "name": "twikoo",
     "plugins": {
       "function": {
         "use": "@cloudbase/framework-plugin-function",
@@ -28,7 +28,7 @@
             }
           ],
           "servicePaths": {
-            "bb": "/bb"
+            "twikoo": "/bb"
           }
         }
       }
