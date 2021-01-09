@@ -4,8 +4,8 @@
 **/
 
 'use strict';
-//自定义api key
-const serverkey = 'xxxx'
+//自定义apikey
+const serverkey = 'bber'
 
 //引入模块
 const tcb = require("@cloudbase/node-sdk");
