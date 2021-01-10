@@ -1,18 +1,16 @@
 /**
  * 个人哔哔接口程序
- * date: 2021.01.09
+ * date: 2021.01.10 20:37
 **/
 
 'use strict';
-//自定义apikey
+//自定义api key
 const serverkey = 'bber'
-
 //引入模块
 const tcb = require("@cloudbase/node-sdk");
 // 云函数 SDK / tencent cloudbase sdk
 const app = tcb.init({ env: tcb.SYMBOL_CURRENT_ENV })
 const db = app.database()
-const _ = db.command
 
 exports.main = async (event, context) => {
     //return event
@@ -82,6 +80,20 @@ exports.main = async (event, context) => {
                     await talksCollection.doc(deId).remove();
             }
             content = '已删除前 '+unNumb+' 条'
+        }else if(Content == '/h' || Content.substr(0,2) == '/h'){ //合并哔哔
+            let Numb = 2,heContent = ''
+            if(/^\/h([2-9])$/.test(Content)){
+                let result = Content.match(/^\/h([2-9])$/)
+                Numb = result[1]
+            }
+            for(var i=1;i<=Numb;i++){
+                    const res = await talksCollection.where({}).orderBy("date", "desc").limit(1).get()
+                    let deId = res.data[0]._id
+                    heContent += res.data[0].content
+                    await talksCollection.doc(deId).remove();
+            }
+            await talksCollection.add({content: heContent, date: new Date(CreateTime), from: From})
+            content = '已合并前 '+Numb+ ' 条 '+heContent
         }else{
             var result = await talksCollection.add({content: Content, date: new Date(CreateTime), from: From})
             if(result.hasOwnProperty('id')){
