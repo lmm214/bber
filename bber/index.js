@@ -48,7 +48,7 @@ exports.main = async (event, context) => {
             let deContent = res.data[0].content
             if(Mode == '/a'){
                 talksCollection.doc(deId).update({
-                    content: deContent+''+editCotent
+                    content: deContent+' '+editCotent
                 })
                 content = '已追加到第 '+Numb+ ' 条 '+deContent+''+editCotent
             }else{
@@ -80,16 +80,16 @@ exports.main = async (event, context) => {
                     await talksCollection.doc(deId).remove();
             }
             content = '已删除前 '+unNumb+' 条'
-        }else if(Content == '/h' || Content.substr(0,2) == '/h'){ //合并哔哔
+        }else if(Content == '/c' || Content.substr(0,2) == '/c'){ //合并哔哔
             let Numb = 2,heContent = ''
-            if(/^\/h([2-9])$/.test(Content)){
-                let result = Content.match(/^\/h([2-9])$/)
+            if(/^\/c([2-9])$/.test(Content)){
+                let result = Content.match(/^\/c([2-9])$/)
                 Numb = result[1]
             }
             for(var i=1;i<=Numb;i++){
                     const res = await talksCollection.where({}).orderBy("date", "desc").limit(1).get()
                     let deId = res.data[0]._id
-                    heContent += res.data[0].content
+                    heContent += res.data[0].content+' '
                     await talksCollection.doc(deId).remove();
             }
             await talksCollection.add({content: heContent, date: new Date(CreateTime), from: From})
