@@ -5,7 +5,7 @@
 
 'use strict';
 //自定义api key
-const serverkey = 'bb'
+const serverkey = 'bber'
 //引入模块
 const tcb = require("@cloudbase/node-sdk");
 // 云函数 SDK / tencent cloudbase sdk
