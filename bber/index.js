@@ -5,7 +5,7 @@
 
 'use strict';
 //自定义api key
-const serverkey = 'bber'
+const serverkey = 'bb'
 //引入模块
 const tcb = require("@cloudbase/node-sdk");
 // 云函数 SDK / tencent cloudbase sdk
@@ -122,15 +122,15 @@ exports.main = async (event, context) => {
                 await talksCollection.add({content: heContent, date: new Date(CreateTime), from: From})
                 content = '已合并前 '+Numb+ ' 条\n---------------\n'+heContent
             }else{
-                var result = await talksCollection.add({content: Content, date: new Date(CreateTime), from: From})
-                if(result.hasOwnProperty('id')){
-                    content = '哔哔成功'
-                }else{
-                    content = '哔哔失败'
-                }
+                content = '无此命令'
             }
         }else{
-            content = '无此命令'
+            var result = await talksCollection.add({content: Content, date: new Date(CreateTime), from: From})
+            if(result.hasOwnProperty('id')){
+                content = '哔哔成功'
+            }else{
+                content = '哔哔失败'
+            }
         }
     }else{
         content = "key不匹配"
