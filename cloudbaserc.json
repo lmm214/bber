@@ -5,7 +5,7 @@
   "functions": [
     {
       "name": "bber",
-      "timeout": 30,
+      "timeout": 15,
       "runtime": "Nodejs10.15",
       "memorySize": 128,
       "handler": "index.main"
@@ -21,7 +21,7 @@
           "functions": [
             {
               "name": "bber",
-              "timeout": 30,
+              "timeout": 15,
               "envVariables": {},
               "runtime": "Nodejs10.15",
               "memory": 128
