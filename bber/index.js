@@ -1,6 +1,6 @@
 /**
  * 个人哔哔接口程序
- * date: 2021.01.10 20:37
+ * date: 2021.01.11 23:37
 **/
 
 'use strict';
@@ -31,6 +31,32 @@ exports.main = async (event, context) => {
                 }
             });
             content = '「最新哔哔」\n==================\n'+resData
+        }else if(Content.substr(0,2) == '/s' || Content.substr(0,2) == '/s'){ //搜索查询
+            if(/^\/s\s+(.*)$/.test(Content)){
+                let resData = '',serCotent = ''
+                let result = Content.match(/^\/s\s+(.*)$/)
+                serCotent = result[1]
+                const res = await talksCollection.where({
+                    content: new db.RegExp({
+                        regexp: serCotent,
+                        options: 'i'
+                    })
+                })
+                .orderBy("date", "desc").limit(9).get()
+                .then((res) => {
+                    for(var i=1;i<=res.data.length;i++){
+                        console.log(res.data[i-1]);
+                        resData += '/b'+i+' '+res.data[i-1].content+'\n---------------\n'
+                    }
+                });
+                if(resData == ''){
+                    content = '哔哔搜索：「'+serCotent+'」\n==================\n无此内容，换个试试？'
+                }else{
+                    content = '哔哔搜索：「'+serCotent+'」\n==================\n'+resData
+                }
+            }else{
+                content = '搜索啥？'
+            }
         }else if(Content.substr(0,2) == '/a' || Content.substr(0,2) == '/e'){ //追加到或编辑第几条
             let Numb = 1,skipBb = 0,editCotent = ''
             let Mode = Content.substr(0,2)
