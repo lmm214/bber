@@ -33,7 +33,7 @@ app.auth({
         }
         page++
         Lately({ 'target': '#bber .datatime' });
-        $("#bber a[rel!=link]:has(img)").slimbox();//图片灯箱效果，需
+        $("#bber a[rel!=link]:has(img)").slimbox();//图片灯箱效果
       });
     }
     $('.button-load').click(function(){
