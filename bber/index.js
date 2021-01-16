@@ -132,6 +132,12 @@ exports.main = async (event, context) => {
                 content = '哔哔失败'
             }
         }
+        //异步转存json
+        //try {
+        //    await app.callFunction({name: 'bber-talk'}, { timeout: 300 })
+        //} catch (e) {
+        //    console.log('开始异步转存json')
+        //}
     }else{
         content = "key不匹配"
     }
