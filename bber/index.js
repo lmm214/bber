@@ -19,9 +19,18 @@ exports.main = async (event, context) => {
     if(serverkey == apikey ){
         const talksCollection = db.collection('talks')
         //提取消息内容，发送者，接受者，时间戳，消息类型，内容
-        var CreateTime = Date.now(),
+        var CreateTime = Date.parse(event.queryStringParameters.time) || Date.now(),
             Content = event.queryStringParameters.text,
             From = event.queryStringParameters.from
+        //判断是否重复内容
+        var resFirstCont = ''
+        var resFirst = await talksCollection.where({}).orderBy("date", "desc").limit(1).get().then((res) => {
+            resFirstCont = res.data[0].content
+        })
+        //console.log(resFirstCont + "第1条 vs 新加入" + Content)
+        if (resFirstCont == Content) {
+            content = "检测到相同内容，已忽略！"
+        }else{
         if (Content.slice(0,1) == '/') { //判断命令
             if(Content == '/l'){ //查询
                 var resData = ''
@@ -138,6 +147,7 @@ exports.main = async (event, context) => {
         //} catch (e) {
         //    console.log('开始异步转存json')
         //}
+        } //判断重复结束
     }else{
         content = "key不匹配"
     }
