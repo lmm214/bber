@@ -12,8 +12,12 @@ const fs = require('fs')
 exports.main = async (event, context) => {
     const talksCollection = db.collection('talks')
     const CreateTime = Date.now()
+    //获取总数 count
+    const resCount = await talksCollection.count()
+    let Count = resCount.total
     await talksCollection.where({}).orderBy("date", "desc").limit(9).get().then((res) => {
-        let dataJson = {code: 0,data: [],msg: `成功`}
+        console.log("总数："+Count)
+        let dataJson = {code: 0,count: Count,data: [],msg: `成功`}
         for(var i=0;i<res.data.length;i++){
             var obj = {
                 date: res.data[i].date,
