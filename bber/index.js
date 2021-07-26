@@ -13,15 +13,41 @@ const app = tcb.init({ env: tcb.SYMBOL_CURRENT_ENV })
 const db = app.database()
 
 exports.main = async (event, context) => {
-    //return event
-    let apikey = event.queryStringParameters.key
+    //提取消息内容，发送者，接受者，时间戳，消息类型，内容
+    var CreateTime = Date.parse(event.queryStringParameters.time) || Date.now(),
+    	DateTime = new Date(CreateTime),
+        Content = event.queryStringParameters.text || '',
+        From = event.queryStringParameters.from || '',
+        apikey = event.queryStringParameters.key || ''
+    const talksCollection = db.collection('talks')
     let content = ''
-    if(serverkey == apikey ){
-        const talksCollection = db.collection('talks')
-        //提取消息内容，发送者，接受者，时间戳，消息类型，内容
-        var CreateTime = Date.parse(event.queryStringParameters.time) || Date.now(),
-            Content = event.queryStringParameters.text,
-            From = event.queryStringParameters.from
+    if (apikey == '' && Content.substr(0, 2) == '/s') { //搜索查询
+    	if (/^\/s\s+(.*)$/.test(Content)) {
+    		let resData = '', serCotent = ''
+    		let result = Content.match(/^\/s\s+(.*)$/)
+    		serCotent = result[1]
+    		const res = await talksCollection.where({
+    			content: new db.RegExp({
+    				regexp: serCotent,
+    				options: 'i'
+    			})
+    		})
+    		.orderBy("date", "desc").limit(9).get()
+    		.then((res) => {
+    			for (var i = 1; i <= res.data.length; i++) {
+    				console.log(res.data[i - 1]);
+    				resData += '/b' + i + ' ' + res.data[i - 1].content + '\n---------------\n'
+    			}
+    		});
+    		if (resData == '') {
+    			content = '哔哔搜索：「' + serCotent + '」\n==================\n无此内容，换个试试？'
+            } else {
+            	content = '哔哔搜索：「' + serCotent + '」\n==================\n' + resData
+            }
+        } else {
+        	content = '搜索啥？'
+        }
+    } else if (serverkey == apikey && Content !== '') {
         //判断是否重复内容
         var resFirstCont = ''
         var resFirst = await talksCollection.where({}).orderBy("date", "desc").limit(1).get().then((res) => {
